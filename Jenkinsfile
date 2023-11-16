@@ -33,7 +33,7 @@ label{
 
 
                steps {
-                sh "rm -rf /var/www/html"
+               
                 sh "cp -r /root/.jenkins/workspace/multi_master/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
 	       }
