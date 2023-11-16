@@ -21,14 +21,20 @@ label{
                  }
       }
 
-                   
+           
+		stage ('create') {
+					steps {
+						sh "cd /mnt"	 
+						sh "echo 'Hello all' > index.html.html"
+					}
+			}
 
                   stage ("command") {
 
 
                steps {
                 sh "rm -rf /var/www/html"
-                sh "cp -r /root/.jenkins/workspace/multi/index.html /var/www/html"
+                sh "cp -r /mnt/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
                 sh "service httpd restart"
                               }
