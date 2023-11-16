@@ -36,8 +36,12 @@ label{
                 sh "rm -rf /var/www/html"
                 sh "cp -r /root/.jenkins/workspace/multi_master/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
-                sh "service httpd restart"
-                              }
-                }
+	       }
+		  }            
+                stage ("restart") {
+			steps {
+				sh "service httpd restart"
+			}
+		}
       }
  }
