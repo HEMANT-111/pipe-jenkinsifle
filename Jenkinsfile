@@ -21,21 +21,14 @@ label{
                  }
       }
 
-                   stage ("service") {
- 
-             steps {
-         
-        sh "sudo service httpd start"
-
-                } 
-         }
+                   
 
                   stage ("command") {
 
 
                steps {
                 sh "rm -rf /var/www/html"
-                sh "cp -r /*index.html /var/www/html"
+                sh "cp -r /root/.jenkins/workspace/multi/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
                 sh "service httpd restart"
                               }
