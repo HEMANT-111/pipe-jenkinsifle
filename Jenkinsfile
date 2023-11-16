@@ -38,10 +38,6 @@ label{
                 sh "chmod -R 777 /var/www/html"
 	       }
 		  }            
-                stage ("restart") {
-			steps {
-				sh "service httpd restart"
-			}
-		}
+        
       }
  }
