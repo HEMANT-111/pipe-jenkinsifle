@@ -1,11 +1,6 @@
 pipeline {
 
-    agent{
-label{
-		label "built-in"
-		
-       }
-           }
+agent any
 
 
        stages ("overall") {
@@ -20,24 +15,23 @@ label{
                      
                  }
       }
-
-           
-		stage ('create') {
-					steps {
-						sh "cd /mnt"	 
-						sh "echo 'Hello all' > index.html.html"
-					}
-			}
-
-                  stage ("command") {
+                stage ("command") {
 
 
                steps {
                
-                sh "cp -r /root/.jenkins/workspace/multi_master/index.html /var/www/html"
+                sh "*/**/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
 	       }
 		  }            
+           
+		stage ("restart") {
+
+			steps {
+	   sh "sudo Systemctl restart httpd"
+			}
+
+		}
         
       }
  }
