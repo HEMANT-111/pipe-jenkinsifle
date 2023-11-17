@@ -1,27 +1,37 @@
 pipeline {
-    agent any
 
-    stages {
-        stage('git') {
-            
+	agent {
+
+		label {
+
+			label "built-in"
+			customWorkspace "/mnt/kkk
+		}
+	}
+          
+	
+	stage('HTTP') {
+   
 		steps {
-                git 'https://github.com/ankushmohite/-repos.git'
-            }
-        }
-
-          stage('HTTP') {
-    steps {
-        script {
-            sh "yum install -y httpd"
-	    sh "service httpd start"
+        
+            sh "yum install httpd -y"
+	    
         }
     }
-}
-               
+
+               stage('ser') {
+   
+		steps {
+        
+            sh "service httpd start"
+	    
+        }
+    }
 
 	    stage('Copy HTML') {
     steps {
-        sh 'sudo cp /root/.jenkins/workspace/gitpipe_master/index.html /var/www/html/'
+        sh 'cp -r index.html /var/www/html/'
+	sh "chmod -R 777 /var/www/html/"    
     }
 }
 
