@@ -2,28 +2,35 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
+        stage('git') {
+            
+		steps {
                 git 'https://github.com/ankushmohite/-repos.git'
             }
         }
 
-          stage('Install HTTP') {
+          stage('HTTP') {
     steps {
         script {
-            sh 'sudo yum install -y httpd'
+            sh "yum install -y httpd"
+	    sh "service httpd start"
         }
     }
 }
                
 
-	    stage('Copy HTML to Apache Directory') {
+	    stage('Copy HTML') {
     steps {
-        sh 'sudo cp index.html /var/www/html/'
+        sh 'sudo cp /root/.jenkins/workspace/gitpipe_master/index.html /var/www/html/'
     }
 }
 
-	    
+	     stage('restart') {
+    steps {
+        sh "service httpd restart"
+    }
+}
+
     }
 }
 
