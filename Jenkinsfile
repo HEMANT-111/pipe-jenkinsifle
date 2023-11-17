@@ -8,7 +8,15 @@ pipeline{
                 }
 
         stages {
-               
+
+		stage ("httpd") {
+
+			steps {
+
+		 sh "yum install httpd -y"
+			}
+		} 		
+		
 		stage ("delete"){
 			steps {
 			sh "cd /mnt/app/"
