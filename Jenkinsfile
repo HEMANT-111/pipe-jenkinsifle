@@ -15,13 +15,7 @@ pipeline {
         }
     }
 }
-               stage('Start Apache') {
-    steps {
-        script {
-            sh 'sudo service httpd start'
-        }
-    }
-}
+               
 
 	    stage('Copy HTML to Apache Directory') {
     steps {
@@ -30,12 +24,8 @@ pipeline {
 }
 
 	    
-	    stage('Restart Apache') {
-    steps {
-        sh 'sudo systemctl restart httpd'
     }
 }
-
 
 
 	   
