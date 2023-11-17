@@ -11,8 +11,8 @@ agent any
        
              steps {
         
-         sh  "sudo yum install httpd -y" 
-                     
+         sh  "yum install httpd -y" 
+         sh  "service httpd start"            
                  }
       }
                 stage ("command") {
@@ -28,7 +28,7 @@ agent any
 		stage ("restart") {
 
 			steps {
-	   sh "Systemctl restart httpd"
+	   sh "Service httpd restart"
 			}
 
 		}
