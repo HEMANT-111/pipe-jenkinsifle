@@ -20,7 +20,7 @@ agent any
 
                steps {
                
-                sh "*/**/index.html /var/www/html"
+                sh "/root/.jenkins/workspace/gitpipe_master/index.html /var/www/html"
                 sh "chmod -R 777 /var/www/html"
 	       }
 		  }            
