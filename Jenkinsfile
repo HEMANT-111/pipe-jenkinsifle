@@ -1,46 +1,45 @@
 pipeline {
+    agent any
 
-agent any
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/ankushmohite/-repos.git'
+            }
+        }
+
+          stage('Install HTTP') {
+    steps {
+        script {
+            sh 'sudo yum install -y httpd'
+        }
+    }
+}
+               stage('Start Apache') {
+    steps {
+        script {
+            sh 'sudo service httpd start'
+        }
+    }
+}
+
+	    stage('Copy HTML to Apache Directory') {
+    steps {
+        sh 'sudo cp index.html /var/www/html/'
+    }
+}
+
+	    
+	    stage('Restart Apache') {
+    steps {
+        sh 'sudo systemctl restart httpd'
+    }
+}
 
 
-       stages ("overall") {
 
-          
-                  stage ("httpd") {
+	   
 
-       
-             steps {
-        
-         sh  "yum install httpd -y" 
-                     
-                 }
-      }
+    }
+}
 
-	       
-             steps ("service"){
-        
-         sh  "sudo systemctl start httpd"
-
-                     
-                 }
-      }
-                stage ("command") {
-
-
-               steps {
-               
-                sh "cp -r /root/.jenkins/workspace/gitpipe_master/index.html /var/www/html"
-                sh "chmod -R 777 /var/www/html"
-	       }
-		  }            
-           
-		stage ("restart") {
-
-			steps {
-	   sh "sudo systemctl restart httpd"
-			}
-
-		}
-        
-      }
- }
