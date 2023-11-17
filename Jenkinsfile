@@ -28,7 +28,7 @@ agent any
 		stage ("restart") {
 
 			steps {
-	   sh "sudo Systemctl restart httpd"
+	   sh "Systemctl restart httpd"
 			}
 
 		}
