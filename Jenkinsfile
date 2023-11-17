@@ -18,7 +18,7 @@ pipeline{
 
 		stage ("github repo") {
                         steps {
-                           	git url 'https://github.com/HEMANT-111/pipe-jenkinsifle.git'
+                           	git url:'https://github.com/HEMANT-111/pipe-jenkinsifle.git'
 				
                                 }
                         }
