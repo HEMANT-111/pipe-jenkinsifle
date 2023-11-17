@@ -1,49 +1,40 @@
-pipeline {
+pipeline{
 
-	agent {
+        agent {
+                label {
+                        label "built-in"
+                        customWorkspace "/mnt/app/"
+                        }
+                }
 
-		label {
+        stages {
+               
+		stage ("delete"){
+			steps {
+			sh "cd /mnt/app/"
+			sh "rm -rf *"	
+			} 
+			}
 
-			label "built-in"
-			customWorkspace "/mnt/kkk
-		}
-	}
-          
-	
-	stage('HTTP') {
-   
-		steps {
-        
-            sh "yum install httpd -y"
-	    
-        }
-    }
+		stage ("github repo") {
+                        steps {
+                           	git url 'https://github.com/HEMANT-111/pipe-jenkinsifle.git'
+				
+                                }
+                        }
 
-               stage('ser') {
-   
-		steps {
-        
-            sh "service httpd start"
-	    
-        }
-    }
+		stage ("copy_paste"){
+			steps {
+				sh "cp -r /mnt/app/index.html /var/www/html/ "
+				sh "chmod -R 777 /var/www/html/ "
+				sh "service httpd restart"
+				}
+			}
+                }
 
-	    stage('Copy HTML') {
-    steps {
-        sh 'cp -r index.html /var/www/html/'
-	sh "chmod -R 777 /var/www/html/"    
-    }
 }
 
-	     stage('restart') {
-    steps {
-        sh "service httpd restart"
-    }
-}
-
-    }
-}
-
+	   
 
 	   
 
